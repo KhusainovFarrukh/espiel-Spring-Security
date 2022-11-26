@@ -11,7 +11,7 @@ class Lesson(
     @SequenceGenerator(name = "lesson_id_generator", sequenceName = "lesson_id_seq")
     val id: Long?,
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     var title: String,
 
     @Column(nullable = false)

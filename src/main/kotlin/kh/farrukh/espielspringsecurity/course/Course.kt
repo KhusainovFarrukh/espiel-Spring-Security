@@ -10,7 +10,7 @@ class Course(
     @SequenceGenerator(name = "course_id_generator", sequenceName = "course_id_seq")
     val id: Long?,
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     var title: String,
 
     var description: String?
