@@ -7,7 +7,7 @@ import javax.persistence.*
 class Lesson(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lesson_id_generator")
     @SequenceGenerator(name = "lesson_id_generator", sequenceName = "lesson_id_seq")
     val id: Long?,
 

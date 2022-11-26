@@ -6,7 +6,7 @@ import javax.persistence.*
 class Course(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_id_generator")
     @SequenceGenerator(name = "course_id_generator", sequenceName = "course_id_seq")
     val id: Long?,
 
