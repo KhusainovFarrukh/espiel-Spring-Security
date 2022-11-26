@@ -20,7 +20,7 @@ class CourseServiceImpl(
 
     override fun getCourseById(id: Long): CourseResponseDTO {
         return courseRepository.findById(id)
-            .orElseThrow { throw ResourceNotFoundException("Course", "id", id) }
+            .orElseThrow { ResourceNotFoundException("Course", "id", id) }
             .toCourseResponseDTO()
     }
 
@@ -35,7 +35,7 @@ class CourseServiceImpl(
 
     override fun updateCourse(id: Long, courseRequestDTO: CourseRequestDTO): CourseResponseDTO {
         val course = courseRepository.findById(id)
-            .orElseThrow { throw ResourceNotFoundException("Course", "id", id) }
+            .orElseThrow { ResourceNotFoundException("Course", "id", id) }
 
         if (courseRequestDTO.title != course.title && courseRepository.existsByTitle(courseRequestDTO.title)) {
             throw DuplicateResourceException("Course", "title", courseRequestDTO.title)
