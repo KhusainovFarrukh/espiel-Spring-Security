@@ -1,5 +1,6 @@
 package kh.farrukh.espielspringsecurity.user
 
+import kh.farrukh.espielspringsecurity.auth.password_encoder.PasswordEncoder
 import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.BadRequestException
 import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.DuplicateResourceException
 import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.ResourceNotFoundException
@@ -10,8 +11,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder
 ) : UserService {
+
+    override fun getByUsername(username: String): AppUser {
+        return userRepository.findByUsername(username)
+            .orElseThrow { ResourceNotFoundException("User", "username", username) }
+    }
 
     override fun getAllUsers(page: Int, pageSize: Int): PagingResponse<UserResponseDTO> {
         return userRepository.findAll(PageRequest.of(page - 1, pageSize))
@@ -57,10 +64,10 @@ class UserServiceImpl(
         val user = userRepository.findById(id)
             .orElseThrow { ResourceNotFoundException("User", "id", id) }
 
-        if (user.password != updatePasswordRequestDTO.password)
+        if (!passwordEncoder.matches(updatePasswordRequestDTO.password, user.password))
             throw BadRequestException("Password")
 
-        user.password = updatePasswordRequestDTO.newPassword
+        user.password = passwordEncoder.encode(updatePasswordRequestDTO.newPassword)
 
         return userRepository.save(user)
             .toUserResponseDTO()

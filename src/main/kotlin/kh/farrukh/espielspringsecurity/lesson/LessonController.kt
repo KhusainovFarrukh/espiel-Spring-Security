@@ -24,7 +24,7 @@ class LessonController(private val lessonService: LessonService) {
         ) pageSize: Int
     ) = ResponseEntity.ok(lessonService.getLessons(courseId, page, pageSize))
 
-    @GetMapping(API_LESSON_PREFIX_ID)
+    @GetMapping(API_LESSON_POSTFIX_ID)
     fun getLessonById(
         @PathVariable(API_LESSON_PARAM_ID) id: Long
     ) = ResponseEntity.ok(lessonService.getLessonById(id))
@@ -34,13 +34,13 @@ class LessonController(private val lessonService: LessonService) {
         @RequestBody lessonRequestDTO: LessonRequestDTO
     ) = ResponseEntity.status(HttpStatus.CREATED).body(lessonService.createLesson(lessonRequestDTO))
 
-    @PutMapping(API_LESSON_PREFIX_ID)
+    @PutMapping(API_LESSON_POSTFIX_ID)
     fun updateLesson(
         @PathVariable(API_LESSON_PARAM_ID) id: Long,
         @RequestBody lessonRequestDTO: LessonRequestDTO
     ) = ResponseEntity.ok(lessonService.updateLesson(id, lessonRequestDTO))
 
-    @DeleteMapping(API_LESSON_PREFIX_ID)
+    @DeleteMapping(API_LESSON_POSTFIX_ID)
     fun deleteLesson(
         @PathVariable(API_LESSON_PARAM_ID) id: Long
     ): ResponseEntity<Void> {

@@ -10,3 +10,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  secret: ${JWT_SECRET:test-secret}
+  access-token-validity-in-seconds: 900
+  refresh-token-validity-in-seconds: 604800

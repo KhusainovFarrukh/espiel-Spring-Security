@@ -1,8 +1,8 @@
 package kh.farrukh.espielspringsecurity.user
 
 const val API_USER_BASE_URL = "/api/users"
-const val API_USER_PREFIX_ID = "/{id}"
-const val API_USER_PREFIX_PASSWORD = "$API_USER_PREFIX_ID/password"
+const val API_USER_POSTFIX_ID = "/{id}"
+const val API_USER_POSTFIX_PASSWORD = "$API_USER_POSTFIX_ID/password"
 
 const val API_USER_PARAM_PAGE = "page"
 const val API_USER_PARAM_PAGE_SIZE = "page_size"

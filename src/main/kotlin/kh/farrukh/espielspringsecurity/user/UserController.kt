@@ -20,7 +20,7 @@ class UserController(private val userService: UserService) {
         ) pageSize: Int
     ) = ResponseEntity.ok(userService.getAllUsers(page, pageSize))
 
-    @GetMapping(API_USER_PREFIX_ID)
+    @GetMapping(API_USER_POSTFIX_ID)
     fun getUserById(
         @PathVariable(API_USER_PARAM_ID) id: Long
     ) = ResponseEntity.ok(userService.getUserById(id))
@@ -30,13 +30,13 @@ class UserController(private val userService: UserService) {
         @RequestBody userRequestDTO: UserRequestDTO
     ) = ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequestDTO))
 
-    @PutMapping(API_USER_PREFIX_ID)
+    @PutMapping(API_USER_POSTFIX_ID)
     fun updateUser(
         @PathVariable(API_USER_PARAM_ID) id: Long,
         @RequestBody userRequestDTO: UserRequestDTO
     ) = ResponseEntity.ok(userService.updateUser(id, userRequestDTO))
 
-    @DeleteMapping(API_USER_PREFIX_ID)
+    @DeleteMapping(API_USER_POSTFIX_ID)
     fun deleteUser(
         @PathVariable(API_USER_PARAM_ID) id: Long
     ): ResponseEntity<Void> {
@@ -44,7 +44,7 @@ class UserController(private val userService: UserService) {
         return ResponseEntity.noContent().build()
     }
 
-    @PatchMapping(API_USER_PREFIX_PASSWORD)
+    @PatchMapping(API_USER_POSTFIX_PASSWORD)
     fun updatePassword(
         @PathVariable(API_USER_PARAM_ID) id: Long,
         @RequestBody updatePasswordRequestDTO: UpdatePasswordRequestDTO

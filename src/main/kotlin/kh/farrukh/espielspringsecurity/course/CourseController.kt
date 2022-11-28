@@ -20,7 +20,7 @@ class CourseController(private val courseService: CourseService) {
         ) pageSize: Int
     ) = ResponseEntity.ok(courseService.getAllCourses(page, pageSize))
 
-    @GetMapping(API_COURSE_PREFIX_ID)
+    @GetMapping(API_COURSE_POSTFIX_ID)
     fun getCourseById(
         @PathVariable(API_COURSE_PARAM_ID) id: Long
     ) = ResponseEntity.ok(courseService.getCourseById(id))
@@ -30,13 +30,13 @@ class CourseController(private val courseService: CourseService) {
         @RequestBody courseRequestDTO: CourseRequestDTO
     ) = ResponseEntity.status(HttpStatus.CREATED).body(courseService.createCourse(courseRequestDTO))
 
-    @PutMapping(API_COURSE_PREFIX_ID)
+    @PutMapping(API_COURSE_POSTFIX_ID)
     fun updateCourse(
         @PathVariable(API_COURSE_PARAM_ID) id: Long,
         @RequestBody courseRequestDTO: CourseRequestDTO
     ) = ResponseEntity.ok(courseService.updateCourse(id, courseRequestDTO))
 
-    @DeleteMapping(API_COURSE_PREFIX_ID)
+    @DeleteMapping(API_COURSE_POSTFIX_ID)
     fun deleteCourse(
         @PathVariable(API_COURSE_PARAM_ID) id: Long
     ): ResponseEntity<Void> {

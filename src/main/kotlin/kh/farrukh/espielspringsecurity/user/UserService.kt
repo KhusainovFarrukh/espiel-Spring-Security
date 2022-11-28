@@ -3,6 +3,7 @@ package kh.farrukh.espielspringsecurity.user
 import kh.farrukh.espielspringsecurity.common.paging.PagingResponse
 
 interface UserService {
+    fun getByUsername(username: String): AppUser
     fun getAllUsers(page: Int, pageSize: Int): PagingResponse<UserResponseDTO>
     fun getUserById(id: Long): UserResponseDTO
     fun createUser(userRequestDTO: UserRequestDTO): UserResponseDTO
