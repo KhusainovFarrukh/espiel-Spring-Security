@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: espiel-spring-security
   datasource:
     url: jdbc:postgresql://localhost:5432/espiel_spring_security
     username: postgres
@@ -10,3 +12,24 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  security:
+    oauth2:
+      whitelist: "/api/login,/api/register,"
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
+
+keycloak:
+  realm: espiel-spring-security-kc-rbac
+  auth-server-url: http://localhost:8080
+#  ssl-required: external
+  resource: course-management
+#  verify-token-audience: true
+  credentials:
+    secret: kr7Tc3UkoildNSuaNg4Njd3XCqBuwrCQ
+#  use-resource-role-mappings: true
+#  confidential-port: 0
+#  grant_type: password
+
+server:
+  port: 7070
