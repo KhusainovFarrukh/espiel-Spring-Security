@@ -13,6 +13,9 @@ class AppUser(
     @Column(nullable = false, unique = true)
     var username: String,
 
+    @Column(unique = true)
+    var email: String?,
+
     @Column(nullable = false)
-    var password: String
+    var keycloakId: String
 )

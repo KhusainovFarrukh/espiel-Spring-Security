@@ -1,4 +1,4 @@
-package kh.farrukh.espielspringsecurity.keycloak
+package kh.farrukh.espielspringsecurity.keycloak.auth
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

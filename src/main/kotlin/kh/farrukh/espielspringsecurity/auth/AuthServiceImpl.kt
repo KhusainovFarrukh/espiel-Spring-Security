@@ -1,30 +1,31 @@
 package kh.farrukh.espielspringsecurity.auth
 
-import kh.farrukh.espielspringsecurity.keycloak.KeycloakAuthClient
-import org.springframework.beans.factory.annotation.Value
+import kh.farrukh.espielspringsecurity.keycloak.auth.KeycloakAuthService
+import kh.farrukh.espielspringsecurity.keycloak.user.KeycloakUserService
+import kh.farrukh.espielspringsecurity.user.UserService
 import org.springframework.stereotype.Service
 
 @Service
 class AuthServiceImpl(
-    private val keycloakAuthClient: KeycloakAuthClient,
+    private val keycloakAuthService: KeycloakAuthService,
+    private val keycloakUserService: KeycloakUserService,
+    private val userService: UserService,
     private val authMapper: AuthMapper,
-    @Value("\${keycloak.credentials.secret}") private var clientSecret: String,
-    @Value("\${keycloak.resource}") private val clientId: String,
-    @Value("\${keycloak.realm}") private val realm: String
 ) : AuthService {
 
     override fun login(loginRequestDTO: LoginRequestDTO): TokenResponseDTO {
-        val requestBody = HashMap<String, Any>()
-        requestBody["client_id"] = clientId
-        requestBody["username"] = loginRequestDTO.username
-        requestBody["password"] = loginRequestDTO.password
-        //TODO use ENUM
-        requestBody["grant_type"] = "password"
-        requestBody["client_secret"] = clientSecret
-        return authMapper.toTokenResponseDTO(keycloakAuthClient.login(realm, requestBody))
+        return authMapper.toTokenResponseDTO(
+            keycloakAuthService.login(loginRequestDTO.username, loginRequestDTO.password)
+        )
     }
 
     override fun register(registerRequestDTO: RegisterRequestDTO): TokenResponseDTO {
-        TODO("Not yet implemented")
+        val keycloakId = keycloakUserService.createUser(authMapper.toUserRepresentation(registerRequestDTO))
+        val userRequestDTO = authMapper.toUserRequestDTO(registerRequestDTO)
+        userRequestDTO.keycloakId = keycloakId
+        userService.createUser(userRequestDTO)
+        return authMapper.toTokenResponseDTO(
+            keycloakAuthService.login(registerRequestDTO.username, registerRequestDTO.password)
+        )
     }
 }

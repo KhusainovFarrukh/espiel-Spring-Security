@@ -8,5 +8,6 @@ interface UserService {
     fun createUser(userRequestDTO: UserRequestDTO): UserResponseDTO
     fun updateUser(id: Long, userRequestDTO: UserRequestDTO): UserResponseDTO
     fun deleteUser(id: Long)
-    fun updatePassword(id: Long, updatePasswordRequestDTO: UpdatePasswordRequestDTO): UserResponseDTO
+    //TODO use keycloak
+//    fun updatePassword(id: Long, updatePasswordRequestDTO: UpdatePasswordRequestDTO): UserResponseDTO
 }

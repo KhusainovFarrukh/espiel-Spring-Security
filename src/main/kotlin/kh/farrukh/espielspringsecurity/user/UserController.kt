@@ -1,6 +1,5 @@
 package kh.farrukh.espielspringsecurity.user
 
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -25,11 +24,13 @@ class UserController(private val userService: UserService) {
         @PathVariable(API_USER_PARAM_ID) id: Long
     ) = ResponseEntity.ok(userService.getUserById(id))
 
-    @PostMapping
-    fun createUser(
-        @RequestBody userRequestDTO: UserRequestDTO
-    ) = ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequestDTO))
+    //TODO use keycloak
+//    @PostMapping
+//    fun createUser(
+//        @RequestBody userRequestDTO: UserRequestDTO
+//    ) = ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userRequestDTO))
 
+    //TODO use keycloak
     @PutMapping(API_USER_PREFIX_ID)
     fun updateUser(
         @PathVariable(API_USER_PARAM_ID) id: Long,
@@ -44,9 +45,10 @@ class UserController(private val userService: UserService) {
         return ResponseEntity.noContent().build()
     }
 
-    @PatchMapping(API_USER_PREFIX_PASSWORD)
-    fun updatePassword(
-        @PathVariable(API_USER_PARAM_ID) id: Long,
-        @RequestBody updatePasswordRequestDTO: UpdatePasswordRequestDTO
-    ) = ResponseEntity.ok(userService.updatePassword(id, updatePasswordRequestDTO))
+    //TODO use keycloak
+//    @PatchMapping(API_USER_PREFIX_PASSWORD)
+//    fun updatePassword(
+//        @PathVariable(API_USER_PARAM_ID) id: Long,
+//        @RequestBody updatePasswordRequestDTO: UpdatePasswordRequestDTO
+//    ) = ResponseEntity.ok(userService.updatePassword(id, updatePasswordRequestDTO))
 }

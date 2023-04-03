@@ -1,6 +1,5 @@
 package kh.farrukh.espielspringsecurity.user
 
-import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.BadRequestException
 import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.DuplicateResourceException
 import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.ResourceNotFoundException
 import kh.farrukh.espielspringsecurity.common.paging.PagingResponse
@@ -53,16 +52,17 @@ class UserServiceImpl(
         userRepository.deleteById(id)
     }
 
-    override fun updatePassword(id: Long, updatePasswordRequestDTO: UpdatePasswordRequestDTO): UserResponseDTO {
-        val user = userRepository.findById(id)
-            .orElseThrow { ResourceNotFoundException("User", "id", id) }
-
-        if (user.password != updatePasswordRequestDTO.password)
-            throw BadRequestException("Password")
-
-        user.password = updatePasswordRequestDTO.newPassword
-
-        return userRepository.save(user)
-            .toUserResponseDTO()
-    }
+    //TODO use keycloak
+//    override fun updatePassword(id: Long, updatePasswordRequestDTO: UpdatePasswordRequestDTO): UserResponseDTO {
+//        val user = userRepository.findById(id)
+//            .orElseThrow { ResourceNotFoundException("User", "id", id) }
+//
+//        if (user.password != updatePasswordRequestDTO.password)
+//            throw BadRequestException("Password")
+//
+//        user.password = updatePasswordRequestDTO.newPassword
+//
+//        return userRepository.save(user)
+//            .toUserResponseDTO()
+//    }
 }

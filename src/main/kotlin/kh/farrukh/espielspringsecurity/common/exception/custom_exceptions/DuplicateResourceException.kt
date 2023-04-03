@@ -9,7 +9,7 @@ class DuplicateResourceException(
     fieldName: String,
     fieldValue: Any
 ) : ApiException(
-    "$resourceName is   already exists with $fieldName '${fieldValue}'",
+    "$resourceName already exists with $fieldName '${fieldValue}'",
     HttpStatus.NOT_FOUND,
     MESSAGE_ID_EXCEPTION_DUPLICATE_RESOURCE,
     arrayOf(resourceName, fieldName, fieldValue)

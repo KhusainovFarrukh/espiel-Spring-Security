@@ -4,11 +4,14 @@ import kh.farrukh.espielspringsecurity.common.exception.custom_exceptions.BadReq
 
 fun AppUser.toUserResponseDTO() = UserResponseDTO(
     id = id ?: 0,
-    username = username
+    username = username,
+    email = email,
+    keycloakId = keycloakId
 )
 
 fun UserRequestDTO.toAppUser() = AppUser(
     id = null,
     username = username,
-    password = password ?: throw BadRequestException("Password")
+    email = email,
+    keycloakId = keycloakId ?: throw BadRequestException("keycloakId")
 )
