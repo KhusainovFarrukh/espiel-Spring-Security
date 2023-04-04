@@ -1,5 +1,6 @@
 package kh.farrukh.espielspringsecurity.keycloak.user
 
+import kh.farrukh.espielspringsecurity.keycloak.util.handleStatus
 import org.keycloak.admin.client.CreatedResponseUtil
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.UserRepresentation
@@ -13,11 +14,9 @@ class KeycloakUserServiceImpl(
 ) : KeycloakUserService {
 
     override fun createUser(userRepresentation: UserRepresentation): String {
-        val userResource = keycloak.realm(realmName).users()
-        val response = userResource.create(userRepresentation)
-        if (response.status < 200 || response.status >= 300) {
-            throw RuntimeException(response.status.toString())
-        }
+        val usersResource = keycloak.realm(realmName).users()
+        val response = usersResource.create(userRepresentation)
+        response.handleStatus()
         return CreatedResponseUtil.getCreatedId(response)
     }
 }
