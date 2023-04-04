@@ -12,12 +12,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  security:
-    oauth2:
-      whitelist: "/api/login,/api/register"
-      resourceserver:
-        jwt:
-          issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
 
 keycloak:
   realm: espiel-spring-security-kc-rbac

@@ -17,21 +17,21 @@ import org.springframework.context.annotation.Bean
 @EnableConfigurationProperties(KeycloakSpringBootProperties::class)
 class KeycloakConfigRbac {
 
-    @Bean
-    fun keycloakAdapterPolicyEnforcer(policyEnforcer: PolicyEnforcer): KeycloakAdapterPolicyEnforcer {
-        return KeycloakAdapterPolicyEnforcer(policyEnforcer)
-    }
-
-    @Bean
-    fun policyEnforcer(keycloakDeployment: KeycloakDeployment, adapterConfig: AdapterConfig): PolicyEnforcer {
-        return PolicyEnforcer(keycloakDeployment, adapterConfig)
-    }
-
-    @Bean
-    fun keycloakDeployment(keycloakSpringBootProperties: KeycloakSpringBootProperties): KeycloakDeployment {
-//        keycloakSpringBootProperties.policyEnforcerConfig.userManagedAccess = UserManagedAccessConfig()
-        return KeycloakDeploymentBuilder.build(keycloakSpringBootProperties)
-    }
+//    @Bean
+//    fun keycloakAdapterPolicyEnforcer(policyEnforcer: PolicyEnforcer): KeycloakAdapterPolicyEnforcer {
+//        return KeycloakAdapterPolicyEnforcer(policyEnforcer)
+//    }
+//
+//    @Bean
+//    fun policyEnforcer(keycloakDeployment: KeycloakDeployment, adapterConfig: AdapterConfig): PolicyEnforcer {
+//        return PolicyEnforcer(keycloakDeployment, adapterConfig)
+//    }
+//
+//    @Bean
+//    fun keycloakDeployment(keycloakSpringBootProperties: KeycloakSpringBootProperties): KeycloakDeployment {
+////        keycloakSpringBootProperties.policyEnforcerConfig.userManagedAccess = UserManagedAccessConfig()
+//        return KeycloakDeploymentBuilder.build(keycloakSpringBootProperties)
+//    }
 
     @Bean
     fun keycloakConfigResolver(): KeycloakConfigResolver {
