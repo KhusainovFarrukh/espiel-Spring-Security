@@ -12,38 +12,25 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
+
+server:
+  port: 7070
 
 keycloak:
   realm: espiel-spring-security-kc-rbac
   auth-server-url: http://localhost:8080
-#  ssl-required: external
   resource: course-management
-#  verify-token-audience: true
+  bearer-only: true
   credentials:
     secret: kr7Tc3UkoildNSuaNg4Njd3XCqBuwrCQ
   policy-enforcer-config:
-#    enforcement-mode: PERMISSIVE
-#    lazy-load-paths: true
     http-method-as-scope: true
     paths:
       - path: /api/login
         enforcement-mode: DISABLED
       - path: /api/register
         enforcement-mode: DISABLED
-#  use-resource-role-mappings: true
-  bearer-only: true
-#  confidential-port: 0
-#  grant_type: password
   securityConstraints:
-#    - securityCollections:
-#        - patterns:
-#            - /api/login
-#            - /api/register
     - authRoles: '*'
       securityCollections:
         - name: Secured
@@ -53,6 +40,3 @@ keycloak:
           patterns:
             - /api/login
             - /api/register
-
-server:
-  port: 7070
